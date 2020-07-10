@@ -54,10 +54,17 @@ class ObjectEqualsTest {
 		List<PointWrong> pointList = new ArrayList<>();
 		pointList.add(p1);
 		log.info("List : pointList.contains(p2) ? {}", pointList.contains(p2));
+//		1、List的contains(obj)方法
+//		实际上，List调用contains(Object obj)方法时，会遍历List中的每一个元素，然后再调用每个元素的equals()方法去跟contains()方法中的参数进行比较，
+//		如果有一个元素的equals()方法返回true则contains()方法返回true，
+//		否则所有equals()方法都不返回true，则contains()方法则返回false。
 
 		HashSet points = new HashSet<>();
 		points.add(p1);
 		log.info("HashSet : points.contains(p2) ? {}", points.contains(p2));
+//		2、HashSet的Contains(obj)方法
+//		当调用HashSet的contains(Object obj)方法时，其实是先调用每个元素的hashCode()方法来返回哈希码，如果哈希码的值相等的情况下再调用equals(obj)方法去判断是否相等，
+//		只有在这两个方法所返回的值都相等的情况下，才判定这个HashSet包含某个元素。
 
 	}
 
@@ -69,6 +76,8 @@ class ObjectEqualsTest {
 		Student student = new Student(2, "li");
 		log.info("ArrayList.indexOf");
 		int index1 = list.indexOf(student);
+
+		// binarySearch 方法内部调用了元素的 compareTo 方法进行比较；
 		Collections.sort(list);
 		log.info("Collections.binarySearch");
 		int index2 = Collections.binarySearch(list, student);
